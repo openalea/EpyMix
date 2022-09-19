@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import math
-from epyland.data import meteo_path
+from .data import meteo_path
 
 #annees = [1994,1997]
 
