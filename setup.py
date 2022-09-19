@@ -1,6 +1,6 @@
 # -*- python -*-
 #
-#       Copyright INRIA - CIRAD - INRA
+#       Copyright CIRAD - INRAE
 #
 #       File author(s):
 #
@@ -28,8 +28,8 @@ package_dir = dict([('', pkg_root_dir)] +
 
 
 setup(
-    name="epyland",
-    version="0.1",
+    name="epymix",
+    version="1.0",
     description="simulation of epidemics at the landscape level",
     long_description="",
 
@@ -45,7 +45,7 @@ setup(
     maintainer="",
     maintainer_email="",
 
-    url="https://github.com/openalea-incubator/epyland",
+    url="https://github.com/openalea-incubator/epymix",
     license="Cecill-C",
     keywords='',
 

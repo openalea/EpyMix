@@ -1,4 +1,4 @@
-# Epyland
+# EpyMix
 
 ## Description
 
@@ -11,10 +11,10 @@ Conda environement : https://docs.conda.io/en/latest/index.html
 
 #### Developer
 
-##### Create a new environment with epyland installed in there :
+##### Create a new environment with EpyMix installed in there :
 
-  conda create -n epyland -c conda-forge python=3
-  conda activate epyland
+  conda create -n epymix -c conda-forge python=3
+  conda activate epymix
 
 	# Install dependency with conda
 	conda install -c conda-forge numpy
@@ -22,9 +22,9 @@ Conda environement : https://docs.conda.io/en/latest/index.html
 	# (Optional) tools
 	conda install -c conda-forge ipython jupyter pytest
   
-    # download epyland and install
-    git clone https://github.com/openalea-incubator/epyland
-    cd epyland
+    # download EpyMix and install
+    git clone https://github.com/openalea-incubator/epymix
+    cd epymix
     python setup.py develop
 
 
