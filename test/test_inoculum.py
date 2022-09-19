@@ -6,7 +6,7 @@ import math
 from epymix.f_rain import f_rain ## f_rain
 from epymix.inoculum import inoculum ## inoculum
 from epymix.f_rotation import f_rotation ## f_rotation
-from epymix.SEIR3 import SEIR ## SEIR fonction principale
+#from epymix.SEIR3 import SEIR ## SEIR fonction principale
 
 
 parameters = dict(
@@ -75,6 +75,7 @@ def test_inoculum_scenario_inoculuminitial():
     assert ng_ext0 == 0
     #TODO make assertion fail for known diff with matlab
 
+'''
 def test_inoculum_nuageannuel():
     """SEIR + PROPORTION DU COUVERT INFECTE OU RESERVOIR DE SPORES"""
     annees = [1994, 1995]
@@ -92,3 +93,4 @@ def test_inoculum_nuageannuel():
                                                                                     rain=rain, inoc_init=inoc_init,
                                                                                     rotation=rotation, t=t,
                                                                                     **parameters)
+'''

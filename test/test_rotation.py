@@ -6,7 +6,7 @@ import math
 from epymix.f_rain import f_rain ## f_rain
 from epymix.inoculum import inoculum ## inoculum
 from epymix.f_rotation import f_rotation ## f_rotation
-from epymix.SEIR3 import SEIR ## SEIR fonction principale
+#from epymix.SEIR3 import SEIR ## SEIR fonction principale
 
 
 parameters = dict(
