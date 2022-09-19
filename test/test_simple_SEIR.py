@@ -3,11 +3,11 @@ import numpy as np
 import math
 
 
-from epyland.f_rain import f_rain ## f_rain
-from epyland.inoculum import inoculum ## inoculum
-from epyland.f_rotation import f_rotation ## f_rotation
-from epyland.SEIR4 import SEIR ## SEIR fonction principale
-from epyland.f_dispersion import epsilon, dispersion_kernel
+from epymix.f_rain import f_rain ## f_rain
+from epymix.inoculum import inoculum ## inoculum
+from epymix.f_rotation import f_rotation ## f_rotation
+from epymix.SEIR4 import SEIR ## SEIR fonction principale
+from epymix.f_dispersion import epsilon, dispersion_kernel
 
 
 parameters = dict(

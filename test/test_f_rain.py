@@ -1,4 +1,4 @@
-from epyland.f_rain import f_rain
+from epymix.f_rain import f_rain
 
 
 def test_f_rain():
