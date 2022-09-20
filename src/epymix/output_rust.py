@@ -1,12 +1,12 @@
 import numpy as np
 
-from f_rain import f_rain ## f_rain
-from f_inoculum import inoculum ## inoculum
-from f_rotation import f_rotation ## f_rotation
-from f_configuration import f_configuration
-from f_SEIR import SEIR ## SEIR fonction principale
-from f_dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
-from f_growth_companion import growth_pois
+from .f_rain import f_rain ## f_rain
+from .f_inoculum import inoculum ## inoculum
+from .f_rotation import f_rotation ## f_rotation
+from .f_configuration import f_configuration
+from .f_SEIR import SEIR ## SEIR fonction principale
+from .f_dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
+from .f_growth_companion import growth_pois
 
 ### BE CAREFUL
 ### CHECK Lx, Ly, RDA, DELTA, BER, SCENARIO
