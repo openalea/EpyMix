@@ -1,6 +1,6 @@
 import numpy as np
 
-from .f_inoculum import inoculum
+from epymix.f_inoculum import inoculum
 
 
 ## Scenario 1 : focus cetral
