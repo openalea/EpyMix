@@ -8,11 +8,11 @@ from .data import meteo_path
 # years: which years from rainfall data
 # delta_t: time step in dd
 
-def f_rain(years, delta_t):
+def rain(years, delta_t):
     if not isinstance(years, list):
         years = [years]
     maxLa = 0
-    rain=[]
+    _rain=[]
     for year in years:
         path = meteo_path(year)
         with open(path) as f:
@@ -20,8 +20,8 @@ def f_rain(years, delta_t):
             a = np.array([int(v) for v in a])
             A = -100 * np.ones((1000))
             A[0:len(a)] = a
-            rain = np.append(rain,A)
+            _rain = np.append(_rain,A)
             maxLa = max(maxLa, len(a))
-    rain = rain.reshape([len(A), len(years)], order='F')
-    rain = np.ceil(rain[0:maxLa]/int(delta_t))
-    return rain
+    _rain = _rain.reshape([len(A), len(years)], order='F')
+    _rain = np.ceil(_rain[0:maxLa]/int(delta_t))
+    return _rain

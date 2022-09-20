@@ -1,8 +1,8 @@
 import numpy as np
 
-from epymix.rain import f_rain ## f_rain
+from epymix.rain import rain as _rain## f_rain
 from epymix.inoculum import inoculum ## inoculum
-from epymix.configuration import f_configuration
+from epymix.configuration import configuration
 from epymix.SEIR import SEIR ## SEIR fonction principale
 from epymix.dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
 from epymix.growth_companion import growth_pois
@@ -19,7 +19,7 @@ delta_companion = 0 # growth start lag of the companion crop (dd), negative: com
 
 ### ROTATION SCENARIO (Lx,Ly,Lr)
 Lr=1; Lx=2; Ly=2; scenario_rot='uniform'; wheat_fraction=0.5
-arrangement = f_configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
+arrangement = configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
 
 ## GROWTH PARAMETERS
 mu_wheat = 0.03 * delta_t / delta_t0  # 0.03 %% mortality rate of S and E tissues (LAI/10dd)
@@ -56,7 +56,7 @@ inf_begin = 0*int(delta_t0/delta_t)  #  1000 dd %% date of epidemic start (gener
 ### f_rain, return rain
 annees = np.arange(2000,2000+n_season,1) #1995: défavorable; 1997: moyenne, 2000: très favorable
 annees = annees.tolist()
-rain = f_rain(annees, delta_t)
+rain = _rain(annees, delta_t)
 
 ### INOCULUM PARAMETERS
 ### inoculum(scenario, frac_inf, inoc_init_abs, ng_ext0_abs, rotation)

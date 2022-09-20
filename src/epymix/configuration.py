@@ -11,7 +11,7 @@ import numpy as np
 #                                                  alternate_strip2, alternate_strip3, alternate_pairs, etc)
 # wheat_fraction: wheat fraction within each patch
 
-def f_configuration(Lr, Lx, Ly, scenario_arr, wheat_fraction):
+def configuration(Lr, Lx, Ly, scenario_arr, wheat_fraction):
     arrangement = np.ones((Lr, Lx, Ly))
 
     ### MIX OF X% OF WHEAT IN EACH PLOT FOR ALL PLOTS
