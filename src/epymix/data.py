@@ -1,6 +1,7 @@
-'Manage data imports'
 import os
 
+### FUNCTION
+# Manage rainfall data import for septoria, called by the function f_rain
 
 data_dir = os.path.join(os.path.dirname(__file__), 'data')
 

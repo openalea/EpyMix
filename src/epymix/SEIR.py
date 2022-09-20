@@ -1,18 +1,24 @@
 import numpy as np
 from scipy import ndimage
 
+### FUNCTION
+# Main function with crop growth and SEIR functions
+
+### PARAMETERS
+# See output files
+
 def SEIR(t, delta_t0, delta_t, season, delta_companion,
-         disease, rain, inoc_init, ng_ext0, rotation,
+         disease, rain, inoc_init, ng_ext0, arrangement,
          mu_wheat, nu, beta_wheat, end_wheat, LAI_K, ber_wheat, ber_companion, Pth_inde, Poi_inde, # beta_companion, end_companion
          h_wheat, h_companion,
          lambd, delta_ei,
          s0, pi_inf0, rho, psi, gamma, theta, sigma, sigma_asco, inf_begin,
          C_Disp_asco, kernel_asco, C_Disp_pycnid, kernel_pycnid, C_Disp_ure, kernel_ure):
 
-    ### rotation parameters; for the 'rotation' function
-    Lr = rotation.shape[0] # rotation period
-    Lx = rotation.shape[1] # number of fileds along the x axis
-    Ly = rotation.shape[2] # number of fileds along the y axis
+    ### arrangement parameters; for the 'arrangement' function
+    Lr = arrangement.shape[0] # number of seasons
+    Lx = arrangement.shape[1] # number of fileds along the x axis
+    Ly = arrangement.shape[2] # number of fileds along the y axis
 
     ### MAIN STATE VARIABLES
     Pth = np.zeros((t,Lx,Ly))   # companion crop, alive and dead (total companion crop)
@@ -55,7 +61,7 @@ def SEIR(t, delta_t0, delta_t, season, delta_companion,
             ### ble = matrix (Lx, Ly), represents the wheat proportion in landscape fields
             ### ex: [0 0 0 ; 1 1 1 ; 0.5 0.5 0.5] represents one landscape
             ### 1st row of fields: cropped without wheat; 2nd: wheat only; 3rd: mix with 50% of wheat
-            res_frac = rotation[int((np.floor(i / season) % Lr)), :, :]  # rotation(:,:, year of rotation)
+            res_frac = arrangement[int((np.floor(i / season) % Lr)), :, :]
             LAI_K_ble = res_frac * LAI_K
             #LAI_K_pois = (1 - res_frac) * LAI_K  # If we suppose that LAI of wheat and the companion species are equivalent
 
