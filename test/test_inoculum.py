@@ -1,7 +1,6 @@
 import numpy as np
 
-#from epymix.f_rain import f_rain ## f_rain
-from epymix.f_inoculum import inoculum
+from .f_inoculum import inoculum
 
 
 ## Scenario 1 : focus cetral
@@ -24,6 +23,6 @@ def test_inoculum_scenario_inoculuminitial():
     inoc_init_abs = 500000
     inoc_init, ng_ext0 = inoculum(scenario_ino="initial_inoculum", Lx=Lx, Ly=Ly, frac_inf=1,
                                   inoc_init_abs=inoc_init_abs, ng_ext0_abs=ng_ext0_abs)
-    desired_inoc_init =np.ones((Lx, Ly)) * 20000000
+    desired_inoc_init =np.ones((Lx, Ly)) * 500000
     np.testing.assert_allclose(desired_inoc_init, inoc_init)
-    assert ng_ext0 == 0
+    assert ng_ext0 == 20000
