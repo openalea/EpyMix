@@ -1,34 +1,31 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-from .f_rain import f_rain ## f_rain
-from .f_inoculum import inoculum ## inoculum
-from .f_rotation import f_rotation ## f_rotation
-from .f_configuration import f_configuration
-from .f_SEIR import SEIR ## SEIR fonction principale
-from .f_dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
-from .f_growth_companion import growth_pois
+from epymix.rain import f_rain ## f_rain
+from epymix.inoculum import inoculum ## inoculum
+from epymix.configuration import f_configuration
+from epymix.SEIR import SEIR ## SEIR fonction principale
+from epymix.dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
+from epymix.growth_companion import growth_pois
 
-### BE CAREFUL
-### CHECK Lx, Ly, RDA, DELTA, BER, SCENARIO
 
 ## MAIN INPUT PARAMETERS
-disease = "septo"
-delta_t0 = 10 # constant, the model has been parameterise such as t = 10 degree-day
+disease = "rust"
 delta_t = 10 # time step
+delta_t0 = 10 # constant, the model has been parameterise such as t = 10 degree-day
 n_season = 1 # number of season
-t = n_season*250*int(delta_t0/delta_t) # length of the experiment
+t = n_season*250*int(delta_t0/delta_t)
 season = 250*int(delta_t0/delta_t)  # 2500 dd %% length of a cropping season
 delta_companion = 0 # growth start lag of the companion crop (dd), negative: companion before, positive: companion after but for i<delta Poi=0
 
-### SPATIAL ARRANGEMENT AND/OR ROTATION SCENARIO (Lx,Ly,Lr)
-### f_rotation(Lr, Lx, Ly, scenario, frac_ble=1)
+### SPATIAL ARRANGEMENT SCENARIO (Lx,Ly,Lr)
 ### f_configuration(Lr, Lx, Ly, scenario, resistant_fraction)
-Lr=1; Lx=1; Ly=1; scenario_rot='uniform'; wheat_fraction=0.5
+Lr=1; Lx=1; Ly=1; scenario_rot='uniform'; wheat_fraction=0.9
 arrangement = f_configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
 
 ## GROWTH PARAMETERS
 mu_wheat = 0.03 * delta_t / delta_t0  # 0.03 %% mortality rate of S and E tissues (LAI/10dd)
-nu = 0.03 * delta_t / delta_t0  # nu = mu %% mortality of I infectious tissues (LAI/10dd)
+nu = 0.03 * delta_t / delta_t0  # nu = mu %% mortality of sI infectious tissues (LAI/10dd)
 mu_companion = 0.03 * delta_t / delta_t0  # 0.03 %% mortality rate of the companion species (LAI/10dd)
 beta_wheat = 0.09 * delta_t / delta_t0  # 0.09 %% wheat growth parameter (LAI/10dd)
 beta_companion = 0.09 * delta_t / delta_t0  # beta_companion = beta_wheat %% growth parameter of the companion crop (LAI/10dd)
@@ -40,47 +37,46 @@ ber_companion = 1  # 1 # spore interception coefficient of the companion species
 h_wheat = 1  # wheat height
 h_companion = 1  # companion height
 Pth_inde, Poi_inde = growth_pois(t=t, season=season, arrangement=arrangement,
-                       mu_companion=mu_companion, beta_companion=beta_companion, end_companion=end_companion, LAI_K=LAI_K)
+                   mu_companion=mu_companion, beta_companion=beta_companion, end_companion=end_companion, LAI_K=LAI_K)
 
 ## E-I TRANSITION PARAMETERS
 delta_ei = 5*int(delta_t0/delta_t)
-lambd = 20*int(delta_t0/delta_t) # 200 dd %% latent duration
+lambd = 10*int(delta_t0/delta_t) # 100 dd %% latent duration
 
 ## EPIDEMIC PARAMETERS
 s0 = 0.0001 # 0.0001 %% lesion size (µm²)
-pi_inf0 = 0.0002 # 0.0002 %% spore probability infection
-rho = 0.002*delta_t/delta_t0  # 0.01 %% spore mortality in P reservoir
-psi = 0.3  # 0.3 %% pycnide emptying rate by rain (only for septoriose)
+pi_inf0 = 0.0002*delta_t/delta_t0 # 0.0002 %% spore probability infection
+rho = 0.01*delta_t/delta_t0  # 0.01 %% spore mortality in P reservoir
+psi = 0.3  # 0 %% pycnide emptying rate by rain (only for septoriose)
 gamma = 0  # 0 %% virulence parameter
-theta = 0.15  # 0.015 %% spore intercropping survival rate
-sigma = 45000000  # 50000000 %% spore production rate (septo: pycnidiospores by rain)
-sigma_asco = 0.2 * sigma # 0.2*sigma %% (parameter for septoriose only, ascospores by wind)
-inf_begin = 0*int(delta_t0/delta_t)  #  1000 dd %% date of epidemic start (generally between 80 et 130 dd for rust)
+theta = 0.01  # 0.01 %% spore intercropping survival rate
+sigma = 1500000 # 1500000 %% spore production rate (LAI-1; septo: pycnidiospores by rain))
+sigma_asco = 0.02 * sigma # 0.2*sigma %% (parameter for septoriose only, ascospores by wind)
+inf_begin = 80*int(delta_t0/delta_t)  # 1000 dd %% date of epidemic start (generally between 80 et 130 dd for rust)
 
 ### RAIN PARAMETER
 ### f_rain, return rain
-annees = np.arange(2000,2000+n_season,1) #1995: défavorable; 1997: moyenne, 2000: très favorable
+annees = np.arange(1994,1994+n_season,1)
 annees = annees.tolist()
 rain = f_rain(annees, delta_t)
 
 ### INOCULUM PARAMETERS
 # inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs)
 # return inoc_init, ng_ext0
-scenario_ino = 'initial_inoculum' # scenario_ino: which scenario of initial inoculum (chose: central_focus, initial_inoculum, annual_cloud)
+scenario_ino = 'initial_inoculum' #scenario_ino: which scenario of initial inoculum (chose: central_focus, initial_inoculum, annual_cloud)
 frac_inf = 1 # frac_inf: fraction of patches within the field inoculated
-inoc_init_abs = 20000000 # inoc_init_abs: initial inoculum intensity
-ng_ext0_abs = int(20000*delta_t/delta_t0) # ng_ext0_abs: external cloud intensity
+inoc_init_abs = 500000 # inoc_init_abs: initial inoculum intensity
+ng_ext0_abs = int(2000*delta_t/delta_t0) # ng_ext0_abs: external cloud intensity
 inoc_init, ng_ext0 = inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs)
-
 
 ### SPORE DISPERSION
 ### dispersion_kernel(disease, rda, alpha)
 ### return Disp, C_Disp
 day_length = (24/(2*delta_t))*60*60
-alpha_asco = 3 # coefficient of dispersal (n m-1;Fitt et al 1987)
+alpha_asco = 3 # 3 coefficient of dispersal (n m-1;Fitt et al 1987)
 radius_asco = 5
 alpha_pycnid = 0.2 * 0.0001 # coefficient of dispersal (m² s-1; Yang et al 1991)
-radius_pycnid = 5
+radius_pycnid =5
 alpha_ure = 3
 radius_ure = 5
 
@@ -117,3 +113,12 @@ Poo = np.mean(Poo, axis=(1,2))
 AUDPC = np.mean(AUDPC, axis=(1,2))
 Eps = np.mean(Eps, axis=(1,2))
 Scont = np.mean(Scont, axis=(1,2))
+
+
+### plotting main outputs
+plt.plot(T, Sth, color='black')
+plt.plot(T, Sus, color='green')
+plt.plot(T, Poi, color='brown')
+plt.plot(T, Ifv, color='red')
+plt.plot(T, Ifc, color='red',linestyle="--")
+
