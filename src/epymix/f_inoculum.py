@@ -1,17 +1,16 @@
-import os
 import numpy as np
-import math
 
-# #### PARAMETRES FONCTION
-# #scenario = "inoculum initial"
-# #frac_inf = 0.1 ## doit etre inferieur a 1 (fraction infectee au debut?)
-#
-# #### PARAMETRES INITIAUX GLOBAUX
-# inoc_init_abs = 500000 # spores presents initialement dans le reservoir
-# ng_ext0_abs = 20000
-# Lx = 21 # taille de la grille(=paysage) en x
-# Ly = 21 # taille de la grille(=paysage) en y
-# rotation = np.zeros((1,Lx,Ly)) #2 depth, Lx rows, Ly colomns
+### FUNCTION
+# Parameterize the initial spore inoculum (spatial position(s) within the grid/field and intensity) (inoc_init)
+# and the intensity of spore external cloud (ng_ext0)
+
+### PARAMETERS
+# scenario_ino: which scenario of initial inoculum (chose: central_focus, initial_inoculum, annual_cloud)
+# Lx: number of patch along the x-axis
+# Ly: number of patch along the y-axis
+# frac_inf: fraction of patches within the field inoculated
+# inoc_init_abs: initial inoculum intensity
+# ng_ext0_abs: external cloud intensity
 
 def inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs):
     inoc_init = np.zeros((Lx, Ly))

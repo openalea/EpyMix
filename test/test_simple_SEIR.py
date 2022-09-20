@@ -1,11 +1,11 @@
 import numpy as np
 
-from epymix.f_rain import f_rain ## f_rain
-from epymix.f_inoculum import inoculum ## inoculum
-from epymix.f_configuration import f_configuration
-from epymix.f_SEIR import SEIR ## SEIR fonction principale
-from epymix.f_dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
-from epymix.f_growth_companion import growth_pois
+from .epymix.f_rain import f_rain ## f_rain
+from .epymix.f_inoculum import inoculum ## inoculum
+from .epymix.f_configuration import f_configuration
+from .epymix.f_SEIR import SEIR ## SEIR fonction principale
+from .epymix.f_dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
+from .epymix.f_growth_companion import growth_pois
 
 
 ## MAIN INPUT PARAMETERS

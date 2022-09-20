@@ -1,6 +1,12 @@
 import numpy as np
 from scipy import ndimage
 
+### FUNCTION
+# Main function with crop growth and SEIR functions
+
+### PARAMETERS
+# See output files
+
 def SEIR(t, delta_t0, delta_t, season, delta_companion,
          disease, rain, inoc_init, ng_ext0, rotation,
          mu_wheat, nu, beta_wheat, end_wheat, LAI_K, ber_wheat, ber_companion, Pth_inde, Poi_inde, # beta_companion, end_companion

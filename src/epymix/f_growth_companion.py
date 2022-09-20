@@ -1,6 +1,16 @@
-import os
 import numpy as np
-import math
+
+### FUNCTION
+# Growth function for the companion crop only
+
+### PARAMETERS
+# t: length of the experiment
+# season: length of a cropping season
+# rotation: patch spatial arrangement (from f_configuration function)
+# mu_companion: mortality rate of the companion species (LAI/10dd)
+# beta_companion: growth parameter of the companion crop (LAI/10dd)
+# end_companion: date of growth end for the companion crop
+# LAI_K: carrying capacity (Maximum canopy LAI)
 
 def growth_pois(t, season, rotation, mu_companion, beta_companion, end_companion, LAI_K):
     ### Rotation parameters; for the rotation function
@@ -18,9 +28,6 @@ def growth_pois(t, season, rotation, mu_companion, beta_companion, end_companion
     ### MAIN FUNCTION
     for i in range(0, t):
         if np.mod(i, season) == 0:
-            ### ble = matrix (Lx, Ly), represents the wheat proportion in landscape fields
-            ### ex: [0 0 0 ; 1 1 1 ; 0.5 0.5 0.5] represents one landscape
-            ### 1st raw of fields: cropped without wheat; 2nd: wheat only; 3rd: mix with 50% of wheat
             res_frac = rotation[int((np.floor(i / season) % Lr)), :, :]  # rotation(:,:, annee de la rotation)
             LAI_K_component = (1 - res_frac) * LAI_K  # Si on suppose que le pois fait autant de LAI que le ble
 
