@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import math
-from .data import meteo_path
+from epymix.data import meteo_path
 
 #annees = [1994,1997]
 
@@ -23,7 +23,6 @@ def f_rain(years, delta_t):
     rain = np.ceil(rain[0:maxLa]/int(delta_t))
     return rain
 
-from epyland.f_rain import f_rain
 delta_t0 = 10 # constant, the model has been parameterise such as t = 10 degree-day
 delta_t = 10 # time step
 n_season2 = 24 # number of season

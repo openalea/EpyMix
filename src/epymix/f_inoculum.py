@@ -38,4 +38,6 @@ def inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs):
             M_nuage_pre[id[0:int(np.floor(frac_inf * Lx * Ly))] + (i * Lx * Ly)] = 1
             M_nuage = M_nuage_pre.reshape([20, Lx, Ly])
         ng_ext0 = ng_ext0_abs * M_nuage
+    else:
+        print('Error in the scenario', scenario_ino)
     return inoc_init, ng_ext0

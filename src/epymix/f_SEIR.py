@@ -1,6 +1,4 @@
-import os
 import numpy as np
-import math
 from scipy import ndimage
 
 def SEIR(t, delta_t0, delta_t, season, delta_companion,
@@ -202,16 +200,16 @@ def SEIR(t, delta_t0, delta_t, season, delta_companion,
                     ex = np.exp(-(fac_int_wheat * eps * pi_inf0 * nsp * s0 / lai_alive))
             else: # with ERIN
                 f_wheat = F_wheat[i - 1, :, :]
-                if 0 in sus:
+                if 0 in lai_alive:
                     ex = np.zeros((Lx,Ly))
                     for j in range(0,Lx):
                         for k in range (0, Ly):
-                            if sus[j,k]==0:
+                            if lai_alive[j,k]==0:
                                 ex[j,k] = 1
                             else:
-                                ex[j,k] = np.exp(-(f_wheat[j,k] * pi_inf0 * nsp[j,k] * s0/sus[j,k]))
+                                ex[j,k] = np.exp(-(f_wheat[j,k] * pi_inf0 * nsp[j,k] * s0/lai_alive[j,k]))
                 else:
-                    ex = np.exp(-(f_wheat * pi_inf0 * nsp * s0 / sus))
+                    ex = np.exp(-(f_wheat * pi_inf0 * nsp * s0 / lai_alive))
 
             ### Canopy fraction intercepting spores
             Ex[i,:,:] = ex

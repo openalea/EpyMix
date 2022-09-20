@@ -1,13 +1,10 @@
-import os
 import numpy as np
-import math
-import matplotlib.pyplot as plt
 
 from .f_rain import f_rain ## f_rain
-from .inoculum import inoculum ## inoculum
+from .f_inoculum import inoculum ## inoculum
 from .f_rotation import f_rotation ## f_rotation
 from .f_configuration import f_configuration
-from .SEIR_ERIN import SEIR ## SEIR fonction principale
+from .f_SEIR import SEIR ## SEIR fonction principale
 from .f_dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
 from .f_growth_companion import growth_pois
 
@@ -124,14 +121,3 @@ Poo = np.mean(Poo, axis=(1,2))
 AUDPC = np.mean(AUDPC, axis=(1,2))
 Eps = np.mean(Eps, axis=(1,2))
 Scont = np.mean(Scont, axis=(1,2))
-
-# temp = np.column_stack((T, Sth, Pth, Poi, Lat, Ifc, Ifv, Sus, Rem, Nsp, LAI, LAI_wheat, Poo, AUDPC, Eps, Scont))
-# np.savetxt("septo_experiment_05.csv", temp,
-#            header= ("t; Sth; Pth; Poi; Lat; Ifc; Ifv; Sus; Rem; Nsp; LAI; LAI_wheat; Poo; AUDPC; Eps; Scont"), comments='',
-#            delimiter=';')
-
-plt.plot(T, Sth, color='black')
-plt.plot(T, Sus, color='green')
-plt.plot(T, Poi, color='brown')
-plt.plot(T, Ifv, color='red')
-plt.plot(T, Ifc, color='red',linestyle="--")
