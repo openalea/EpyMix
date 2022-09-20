@@ -1,6 +1,6 @@
 import numpy as np
 
-from f_rotation import f_rotation
+from epymix.f_rotation import f_rotation
 
 
 def test_rotation_scenario1():

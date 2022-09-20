@@ -1,4 +1,4 @@
-import data as data
+import epymix.data as data
 import os
 
 def test_meteo_path():
