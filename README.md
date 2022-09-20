@@ -13,14 +13,12 @@ Conda environement : https://docs.conda.io/en/latest/index.html
 
 ##### Create a new environment with EpyMix installed in there :
 
-  conda create -n epymix -c conda-forge python=3
-  conda activate epymix
+    conda create -n epymix -c conda-forge python=3 scipy
+    conda activate epymix
 
-	# Install dependency with conda
-	conda install -c conda-forge numpy
 	
-	# (Optional) tools
-	conda install -c conda-forge ipython jupyter pytest
+    # (Optional) tools
+    conda install -c conda-forge ipython jupyter pytest
   
     # download EpyMix and install
     git clone https://github.com/openalea-incubator/epymix
