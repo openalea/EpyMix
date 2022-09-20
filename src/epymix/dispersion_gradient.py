@@ -1,19 +1,18 @@
-import os
 import numpy as np
 import math
 from scipy.integrate import quad
 
-### SPORE INTERCEPTION FUNCTION BY CANOPY
-# def epsilon(ber_ble, LAI_ble, ber_pois, LAI_pois):
-#     e = 1 - np.exp(-ber * S)
-#     return e
+### FUNCTION
+# Spore dispersion kernel within the field, i.e. spore tranfert between patches
+# One function for each disease (septoria vs. rust)
 
-def epsilon(ber_wheat, LAI_K):
-    e = 1 - np.exp(-ber_wheat * LAI_K)
-    return e
+### PARAMETERS
+# day_length: day length in seconds
+# alpha_asco: ascospores coefficient of dispersal (n m-1;Fitt et al 1987)
+# radius_asco: kernel radius
+# alpha_pycnid : pycnidiospores coefficient of dispersal (m² s-1; Yang et al 1991)
+# radius_pycnid: kernel radius
 
-
-### FUNCTION FOR SPORE CLOUD DISPERSION INTO THE LANDSCAPE
 def dispersion_kernel_septo(day_length, alpha_asco, radius_asco, alpha_pycnid, radius_pycnid):
     # Dispersion for ascospores
     def f(r):

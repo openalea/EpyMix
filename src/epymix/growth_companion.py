@@ -1,12 +1,22 @@
-import os
 import numpy as np
-import math
 
-def growth_pois(t, season, rotation, mu_companion, beta_companion, end_companion, LAI_K):
+### FUNCTION
+# Growth function for the companion crop only
+
+### PARAMETERS
+# t: length of the experiment
+# season: length of a cropping season
+# arrangement: patch spatial arrangement (from f_configuration function)
+# mu_companion: mortality rate of the companion species (LAI/10dd)
+# beta_companion: growth parameter of the companion crop (LAI/10dd)
+# end_companion: date of growth end for the companion crop
+# LAI_K: carrying capacity (Maximum canopy LAI)
+
+def growth_pois(t, season, arrangement, mu_companion, beta_companion, end_companion, LAI_K):
     ### Rotation parameters; for the rotation function
-    Lr = rotation.shape[0] # rotation period
-    Lx = rotation.shape[1] # number of fileds along the x axis
-    Ly = rotation.shape[2] # number of fileds along the y axis
+    Lr = arrangement.shape[0] # rotation period
+    Lx = arrangement.shape[1] # number of fileds along the x axis
+    Ly = arrangement.shape[2] # number of fileds along the y axis
 
     ### Canopy component
     Pth_inde = np.zeros((t,Lx,Ly))   # Ph = Companion : dead + aline (total companion)
@@ -18,11 +28,8 @@ def growth_pois(t, season, rotation, mu_companion, beta_companion, end_companion
     ### MAIN FUNCTION
     for i in range(0, t):
         if np.mod(i, season) == 0:
-            ### ble = matrix (Lx, Ly), represents the wheat proportion in landscape fields
-            ### ex: [0 0 0 ; 1 1 1 ; 0.5 0.5 0.5] represents one landscape
-            ### 1st raw of fields: cropped without wheat; 2nd: wheat only; 3rd: mix with 50% of wheat
-            res_frac = rotation[int((np.floor(i / season) % Lr)), :, :]  # rotation(:,:, annee de la rotation)
-            LAI_K_component = (1 - res_frac) * LAI_K  # Si on suppose que le pois fait autant de LAI que le ble
+            res_frac = arrangement[int((np.floor(i / season) % Lr)), :, :]
+            LAI_K_component = (1 - res_frac) * LAI_K
 
             ###Canopy initialisation
             pth0 = LAI_K_component / 1000.0
