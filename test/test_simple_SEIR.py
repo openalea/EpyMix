@@ -1,11 +1,11 @@
 import numpy as np
 
-from epymix.f_rain import f_rain ## f_rain
-from epymix.f_inoculum import inoculum ## inoculum
-from epymix.f_configuration import f_configuration
-from epymix.f_SEIR import SEIR ## SEIR fonction principale
-from epymix.f_dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
-from epymix.f_growth_companion import growth_pois
+from epymix.rain import f_rain ## f_rain
+from epymix.inoculum import inoculum ## inoculum
+from epymix.configuration import f_configuration
+from epymix.SEIR import SEIR ## SEIR fonction principale
+from epymix.dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
+from epymix.growth_companion import growth_pois
 
 
 ## MAIN INPUT PARAMETERS
@@ -19,7 +19,7 @@ delta_companion = 0 # growth start lag of the companion crop (dd), negative: com
 
 ### ROTATION SCENARIO (Lx,Ly,Lr)
 Lr=1; Lx=2; Ly=2; scenario_rot='uniform'; wheat_fraction=0.5
-rotation = f_configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
+arrangement = f_configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
 
 ## GROWTH PARAMETERS
 mu_wheat = 0.03 * delta_t / delta_t0  # 0.03 %% mortality rate of S and E tissues (LAI/10dd)
@@ -34,7 +34,7 @@ ber_wheat = 1  # 1 # wheat spore interception coefficient (the Beer-Lambert law)
 ber_companion = 1  # 1 # spore interception coefficient of the companion species (the Beer-Lambert law)
 h_wheat = 1  # wheat height
 h_companion = 1  # companion height
-Pth_inde, Poi_inde = growth_pois(t=t, season=season, rotation=rotation,
+Pth_inde, Poi_inde = growth_pois(t=t, season=season, arrangement=arrangement,
                        mu_companion=mu_companion, beta_companion=beta_companion, end_companion=end_companion, LAI_K=LAI_K)
 
 ## E-I TRANSITION PARAMETERS
@@ -91,7 +91,7 @@ def test_simple_seir():
     ### fonction SEIR
     Nsp, Pth, Poi, Sth, Sus, Lat, Ifc, Ifv, Rem, LAI, LAI_wheat, Poo, Eps, AUDPC, Scont = \
         SEIR(t=t, delta_t0=delta_t0, delta_t=delta_t, season=season, delta_companion=delta_companion,
-             disease=disease, rain=rain, rotation=rotation, inoc_init=inoc_init, ng_ext0=ng_ext0,
+             disease=disease, rain=rain, arrangement=arrangement, inoc_init=inoc_init, ng_ext0=ng_ext0,
              mu_wheat=mu_wheat, nu=nu, beta_wheat=beta_wheat,
              # beta_companion=beta_companion, end_companion=end_companion
              end_wheat=end_wheat, LAI_K=LAI_K, ber_wheat=ber_wheat, ber_companion=ber_companion, Pth_inde=Pth_inde,
