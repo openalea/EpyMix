@@ -20,7 +20,11 @@ delta_companion = 0 # growth start lag of the companion crop (dd), negative: com
 
 ### SPATIAL ARRANGEMENT SCENARIO (Lx,Ly,Lr)
 ### f_configuration(Lr, Lx, Ly, scenario, resistant_fraction)
-Lr=1; Lx=1; Ly=1; scenario_rot='uniform'; wheat_fraction=0.5
+Lr=1 # Lr: number of seasons
+Lx=1 # Lx: number of patch along the x-axis
+Ly=1 # Ly: number of patch along the y-axis
+scenario_rot='uniform' # scenario_rot: rotation scenario (chose: uniform, random, chessboard, alternate, alternate_rank, etc)
+wheat_fraction=0.5 # wheat_fraction: wheat fraction within each patch
 arrangement = f_configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
 
 ## GROWTH PARAMETERS
