@@ -16,7 +16,7 @@
 """
 """
 # ==============================================================================
-from setuptools import setup, find_packages, Extension, Command
+from setuptools import setup, find_packages
 # ==============================================================================
 
 pkg_root_dir = 'src'
@@ -28,10 +28,10 @@ package_dir = dict([('', pkg_root_dir)] +
 
 
 setup(
-    name="epymix",
+    name="openalea.epymix",
     version="1.0",
-    description="simulation of epidemics at the landscape level",
-    long_description="",
+    description="Epidemic dilution and barrier factors in Mixture crops ",
+    long_description="A Python Model to study Epidemic dilution and barrier factors in Mixture crops ",
 
     author="* Sebastien Levionnois\n"
            "* Christian Fournier\n"
@@ -45,16 +45,13 @@ setup(
     maintainer="",
     maintainer_email="",
 
-    url="https://github.com/openalea-incubator/epymix",
+    url="https://github.com/openalea/epymix",
     license="Cecill-C",
-    keywords='',
+    keywords='openalea, wheat, epidemiology, desease, septoria, rust, crop-mixture',
 
     # package installation
-    packages=packages,
-    package_dir=package_dir,
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    package_data={"": ["*.txt"]},
     zip_safe=False,
-    #ext_modules=cythonize(extentions),
-
-    # See MANIFEST.in
-    include_package_data=True,
     )
