@@ -1,14 +1,26 @@
 import numpy as np
 from .data import meteo_path
 
-### FUNCTION
-# Define rainfall scenario (unfavorable, average, favorable) for septoria form rainfall data
-
-### PARAMETERS
-# years: which years from rainfall data
-# delta_t: time step in dd
-
 def rain(years, delta_t):
+    """
+    Define rainfall scenario.
+
+    Define rainfall scenario (unfavorable, average, favorable) 
+    for septoria form rainfall data
+
+    Parameters
+    ----------
+    years: int
+        which years from rainfall data
+    delta_t: int
+        time step in dd
+    
+    Returns
+    -------
+    numpy array
+        rain
+    """
+
     if not isinstance(years, list):
         years = [years]
     maxLa = 0

@@ -1,18 +1,32 @@
 import numpy as np
 
-### FUNCTION
-# Parameterize the initial spore inoculum (spatial position(s) within the grid/field and intensity) (inoc_init)
-# and the intensity of spore external cloud (ng_ext0)
-
-### PARAMETERS
-# scenario_ino: which scenario of initial inoculum (chose: central_focus, initial_inoculum, annual_cloud)
-# Lx: number of patch along the x-axis
-# Ly: number of patch along the y-axis
-# frac_inf: fraction of patches within the field inoculated
-# inoc_init_abs: initial inoculum intensity
-# ng_ext0_abs: external cloud intensity
-
 def inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs):
+    """
+    Parameterize the initial spore inoculum.
+
+    Parameterize the initial spore inoculum (spatial positions) 
+    within the grid/field and intensity (inoc_init)
+    and the intensity of spore external cloud (ng_ext0).
+
+    Parameter
+    ---------
+    scenario_ino : str 
+        which scenario of initial inoculum (chose: central_focus, initial_inoculum, annual_cloud)
+    Lx : int 
+        number of patch along the x-axis
+    Ly : int 
+        number of patch along the y-axis
+    frac_inf : float 
+        fraction of patches within the field inoculated
+    inoc_init_abs : int 
+        initial inoculum intensity
+    ng_ext0_abs : int 
+        external cloud intensity
+
+    Returns
+    -------
+        int, int
+    """
     inoc_init = np.zeros((Lx, Ly))
 
     ### INOCULUM FROM A UNIQUE FOCUS

@@ -1,17 +1,30 @@
 import numpy as np
 
-### FUNCTION
-# return the spatial arrangement of patches within the field and the wheat fraction within each patch
-
-### PARAMETERS
-# Lr: number of seasons
-# Lx: number of patch along the x-axis
-# Ly: number of patch along the y-axis
-# scenario_rot: rotation scenario (chose: uniform, random, chessboard, alternate, alternate_rank,
-#                                                  alternate_strip2, alternate_strip3, alternate_pairs, etc)
-# wheat_fraction: wheat fraction within each patch
-
 def configuration(Lr, Lx, Ly, scenario_arr, wheat_fraction):
+    """
+    Return the spatial arrangement of patches.
+
+    Return the spatial arrangement of patches within the field 
+    and the wheat fraction within each patch.
+
+    Parameters
+    ----------
+    Lr : int 
+        number of seasons
+    Lx : int 
+        number of patch along the x-axis
+    Ly : int 
+        number of patch along the y-axis
+    scenario_rot : str
+        rotation scenario (chose: uniform, random, chessboard, alternate, alternate_rank,
+                                alternate_strip2, alternate_strip3, alternate_pairs, etc)
+    wheat_fraction : float
+        wheat fraction within each patch
+
+    Returns
+    -------
+    array
+    """
     arrangement = np.ones((Lr, Lx, Ly))
 
     ### MIX OF X% OF WHEAT IN EACH PLOT FOR ALL PLOTS
