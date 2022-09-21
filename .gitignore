@@ -105,3 +105,4 @@ venv.bak/
 /src/epyland/f_configuration.py
 
 .idea
+.DS_Store
