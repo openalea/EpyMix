@@ -1,0 +1,40 @@
+{% set data = load_setup_py_data() %}
+
+package:
+  name: openalea.epymix
+  version: {{ data.get('version') }}
+
+source:
+  path: ..
+
+build:
+  noarch: python
+  preserve_egg_dir: False
+  number: 0
+  script: {{PYTHON}} setup.py install
+  
+requirements:
+  build:
+    - python {{PY_VER}}
+    - setuptools
+  run:
+    - python >=3.6
+    - scipy
+test:
+  requires:
+    - pytest
+  imports:
+    - epymix
+  source_files:
+    - share/data/**
+    - test/**
+    - test/data/**
+  commands:
+    - cd test
+    - pytest -v --ignore=test_aml.py  --ignore=test_stat.py
+
+about:
+  home: {{ data.get('url') }}
+  license: CeCILL-C
+  summary: {{ data.get('description') }}
+

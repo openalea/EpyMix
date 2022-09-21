@@ -3,7 +3,7 @@ import os
 ### FUNCTION
 # Manage rainfall data import for septoria, called by the function f_rain
 
-data_dir = os.path.join(os.path.dirname(__file__), 'data')
+data_dir = os.path.join(os.path.dirname(__file__), 'datafiles')
 
 def meteo_path(year, is_year_start=True):
     """ Manage rainfall data import for septoria, called by the function rain
