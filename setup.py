@@ -19,14 +19,6 @@
 from setuptools import setup, find_packages
 # ==============================================================================
 
-pkg_root_dir = 'src'
-packages = [pkg for pkg in find_packages(pkg_root_dir)]
-top_pkgs = [pkg for pkg in packages if len(pkg.split('.')) <= 2]
-package_dir = dict([('', pkg_root_dir)] +
-                   [(pkg, pkg_root_dir + "/" + pkg.replace('.', '/'))
-                    for pkg in top_pkgs])
-
-
 setup(
     name="openalea.epymix",
     version="1.0",
