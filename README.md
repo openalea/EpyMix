@@ -9,6 +9,11 @@
 
 Conda environement : https://docs.conda.io/en/latest/index.html
 
+#### User
+
+    conda create -n epymix -c openalea3 -c conda-forge openalea.epymix notebook matplotlib
+    conda activate epymix
+
 #### Developer
 
 ##### Create a new environment with EpyMix installed in there :
