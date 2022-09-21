@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from epymix.rain import f_rain ## f_rain
+from epymix.rain import rain as _rain ## f_rain
 from epymix.inoculum import inoculum ## inoculum
-from epymix.configuration import f_configuration
+from epymix.configuration import configuration
 from epymix.SEIR import SEIR ## SEIR fonction principale
 from epymix.dispersion_gradient import dispersion_kernel_rust, dispersion_kernel_septo
 from epymix.growth_companion import growth_pois
@@ -19,9 +19,9 @@ season = 250*int(delta_t0/delta_t)  # 2500 dd %% length of a cropping season
 delta_companion = 0 # growth start lag of the companion crop (dd), negative: companion before, positive: companion after but for i<delta Poi=0
 
 ### SPATIAL ARRANGEMENT SCENARIO (Lx,Ly,Lr)
-### f_configuration(Lr, Lx, Ly, scenario, resistant_fraction)
+### configuration(Lr, Lx, Ly, scenario, resistant_fraction)
 Lr=1; Lx=1; Ly=1; scenario_rot='uniform'; wheat_fraction=0.5
-arrangement = f_configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
+arrangement = configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
 
 ## GROWTH PARAMETERS
 mu_wheat = 0.03 * delta_t / delta_t0  # 0.03 %% mortality rate of S and E tissues (LAI/10dd)
@@ -55,10 +55,10 @@ sigma_asco = 0.2 * sigma # 0.2*sigma %% (parameter for septoriose only, ascospor
 inf_begin = 0*int(delta_t0/delta_t)  #  1000 dd %% date of epidemic start (generally between 80 et 130 dd for rust)
 
 ### RAIN PARAMETER
-### f_rain, return rain
+### _rain, return rain
 annees = np.arange(2000,2000+n_season,1) #1995: défavorable; 1997: moyenne, 2000: très favorable
 annees = annees.tolist()
-rain = f_rain(annees, delta_t)
+rain = _rain(annees, delta_t)
 
 ### INOCULUM PARAMETERS
 # inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs)
