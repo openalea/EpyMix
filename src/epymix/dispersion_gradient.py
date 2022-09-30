@@ -14,6 +14,36 @@ from scipy.integrate import quad
 # radius_pycnid: kernel radius
 
 def dispersion_kernel_septo(day_length, alpha_asco, radius_asco, alpha_pycnid, radius_pycnid):
+    """
+    Dispersion of spore kernel within the field.
+
+    Spore dispersion kernel within the field, 
+    i.e. spore tranfert between patches
+
+    Parameters
+    ----------
+    day_length: int
+        day length in seconds
+    alpha_asco: float
+        ascospores coefficient of dispersal (n m-1;Fitt et al 1987)
+    radius_asco: float
+        kernel radius
+    alpha_pycnid : float
+        pycnidiospores coefficient of dispersal (m² s-1; Yang et al 1991)
+    radius_pycnid: float
+        kernel radius
+    
+    Returns
+    -------
+    kernel_asco : float
+    C_Disp_asco : list
+    kernel_pycnid : float
+    C_Disp_pycnid : list
+
+    See Also
+    --------
+    dispersion_kernel_rust
+    """
     # Dispersion for ascospores
     def f(r):
         return pow(abs(r)+1,-alpha_asco)
@@ -36,6 +66,30 @@ def dispersion_kernel_septo(day_length, alpha_asco, radius_asco, alpha_pycnid, r
 
 
 def dispersion_kernel_rust(day_length, alpha_ure, radius_ure):
+    """
+    Dispersion of spore kernel within the field.
+
+    Spore dispersion kernel within the field, 
+    i.e. spore tranfert between patches
+
+    Parameters
+    ----------
+    day_length: int
+        day length in seconds
+    alpha_ure: float
+        ure coefficient of dispersal (n m-1;Fitt et al 1987)
+    radius_ure: float
+        kernel radius
+    
+    Returns
+    -------
+    kernel_ure : float
+    C_Disp_ure : list
+
+    See Also
+    --------
+    dispersion_kernel_septo
+    """
     def f(r):
         return pow(abs(r)+1,-alpha_ure)
     Disp_ure = []

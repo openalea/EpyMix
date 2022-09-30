@@ -103,3 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 /src/epyland/f_configuration.py
+
+.idea
+.DS_Store

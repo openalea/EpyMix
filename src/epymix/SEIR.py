@@ -1,11 +1,6 @@
 import numpy as np
 from scipy import ndimage
 
-### FUNCTION
-# Main function with crop growth and SEIR functions
-
-### PARAMETERS
-# See output files
 
 def SEIR(t, delta_t0, delta_t, season, delta_companion,
          disease, rain, inoc_init, ng_ext0, arrangement,
@@ -14,7 +9,13 @@ def SEIR(t, delta_t0, delta_t, season, delta_companion,
          lambd, delta_ei,
          s0, pi_inf0, rho, psi, gamma, theta, sigma, sigma_asco, inf_begin,
          C_Disp_asco, kernel_asco, C_Disp_pycnid, kernel_pycnid, C_Disp_ure, kernel_ure):
+    """
+    Main function with crop growth and SEIR functions.
 
+    Parameters
+    ----------
+    Parameters are described in the output files.
+    """
     ### arrangement parameters; for the 'arrangement' function
     Lr = arrangement.shape[0] # number of seasons
     Lx = arrangement.shape[1] # number of fileds along the x axis
