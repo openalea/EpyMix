@@ -19,9 +19,14 @@ season = 250*int(delta_t0/delta_t)  # 2500 dd %% length of a cropping season
 delta_companion = 0 # growth start lag of the companion crop (dd), negative: companion before, positive: companion after but for i<delta Poi=0
 
 ### SPATIAL ARRANGEMENT SCENARIO (Lx,Ly,Lr)
-### configuration(Lr, Lx, Ly, scenario, resistant_fraction)
-Lr=1; Lx=1; Ly=1; scenario_rot='uniform'; wheat_fraction=0.9
-arrangement = configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
+### f_configuration(Lr, Lx, Ly, scenario, resistant_fraction)
+Lr=1 # Lr: number of seasons
+Lx=1 # Lx: number of patch along the x-axis
+Ly=1 # Ly: number of patch along the y-axis
+scenario_rot='uniform' # scenario_rot: rotation scenario (chose: uniform, random, chessboard, alternate, alternate_rank, etc)
+wheat_fraction=0.5 # wheat_fraction: wheat fraction within each patch
+arrangement = f_configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
+
 
 ## GROWTH PARAMETERS
 mu_wheat = 0.03 * delta_t / delta_t0  # 0.03 %% mortality rate of S and E tissues (LAI/10dd)
