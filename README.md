@@ -15,9 +15,9 @@ The modelled diseases (rust and septoria) are associated with two different set 
 - Jonathan Sanner (Ecole Normale Supérieure, CERES)
 - David Claessen (Ecole Normale Suéprieure, CERES)
 - Corinne Robert (INRAE, UMR EcoSys)
-- Sébastien Levionnois (INRAE, UMR EcoSys & AGAP)
-- Christophe Pradal (CIRAD & INRIA, UMR AGAP)
-- Christian Fournier (INRAE, UMR LEPSE)
+- [Sébastien Levionnois](https://github.com/slevionnois2) (INRAE, UMR EcoSys & AGAP)
+- [Christophe Pradal](https://github.com/pradal) (CIRAD & INRIA, UMR AGAP)
+- [Christian Fournier](https://github.com/christian34) (INRAE, UMR LEPSE)
 
 ## Installation
 
