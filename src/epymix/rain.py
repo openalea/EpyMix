@@ -26,7 +26,7 @@ def rain(year, n_season, delta_t):
     if not isinstance(years, list):
         years = [years]
     maxLa = 0
-    _rain=[]
+    rain=[]
     for year in years:
         path = meteo_path(year)
         with open(path) as f:
@@ -34,8 +34,8 @@ def rain(year, n_season, delta_t):
             a = np.array([int(v) for v in a])
             A = -100 * np.ones((1000))
             A[0:len(a)] = a
-            _rain = np.append(_rain,A)
+            rain = np.append(rain,A)
             maxLa = max(maxLa, len(a))
-    _rain = _rain.reshape([len(A), len(years)], order='F')
-    _rain = np.ceil(_rain[0:maxLa]/int(delta_t))
-    return _rain
+    rain = rain.reshape([len(A), len(years)], order='F')
+    rain = np.ceil(rain[0:maxLa]/int(delta_t))
+    return rain
