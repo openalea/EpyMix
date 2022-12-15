@@ -1,7 +1,7 @@
 import numpy as np
 from .data import meteo_path
 
-def rain(years, delta_t):
+def rain(year, n_season, delta_t):
     """
     Define rainfall scenario.
 
@@ -20,6 +20,8 @@ def rain(years, delta_t):
     numpy array
         rain
     """
+    years = np.arange(year,year+n_season,1) #1995: bad; 1997: medium, 2000: good
+    years = years.tolist()
 
     if not isinstance(years, list):
         years = [years]
