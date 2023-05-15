@@ -46,4 +46,8 @@ setup(
     package_dir={"": "src"},
     package_data={"": ["*.txt"]},
     zip_safe=False,
+    setup_requires = ['openalea.deploy'],
+    entry_points = {
+       "wralea": ["epymix = epymix.wralea",
+                  "demo = epymix.wralea.demo"]},    
     )
