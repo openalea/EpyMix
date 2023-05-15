@@ -1,10 +1,8 @@
-import os
 import numpy as np
 import pandas as pd
-import datetime
 import matplotlib.pyplot as plt
 
-from epymix.rain import rain as rain ## f_rain
+from epymix.rain_WD import rain as rain ## f_rain
 from epymix.inoculum import inoculum ## inoculum
 from epymix.configuration import configuration
 from epymix.SEIR import SEIR ## SEIR fonction principale
@@ -62,11 +60,20 @@ sigma = 45000000  # 50000000 %% spore production rate (septo: pycnidiospores by 
 sigma_asco = 0.2 * sigma # 0.2*sigma %% (parameter for septoriose only, ascospores by wind)
 inf_begin = 0*int(delta_t0/delta_t)  #  1000 dd %% date of epidemic start (generally between 80 et 130 dd for rust)
 
+
+
 ### RAIN PARAMETER
 ### _rain, return rain
-year=2012
-rain = rain(year, n_season, delta_t)
+# annees = np.arange(2000,2000+n_season,1) #1995: défavorable; 1997: moyenne, 2000: très favorable
+# annees = annees.tolist()
 
+### RAIN PARAMETER WEATHER DATA
+site = 'Landbruksmeteorologisk tjeneste'
+time_start = '2019-09-01'
+time_end = '2020-09-01'
+sowing_date = '2019-09-01'
+rainfall_threshold = 3
+rain = rain(site, time_start, time_end, delta_t, sowing_date, rainfall_threshold)
 
 ### INOCULUM PARAMETERS
 # inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs)
