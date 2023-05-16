@@ -5,7 +5,7 @@ __version__ = '1.0.0'
 __license__ = 'CECILL-C'
 __authors__ = 'Sebastien Levionnois, Christophe Pradal, ...'
 __institutes__ = 'INRAE/CIRAD'
-__description__ = 'Epidemic on agriecological mixture.'
+__description__ = 'Intercropping for pest management'
 __url__ = 'https://github.com/openalea-incubator/epymix'
 
 __editable__ = 'True'
@@ -14,15 +14,16 @@ __alias__ = ["EpyMix"] # Aliases for compatibitity
 
 __all__ = """
 rain
-""".split()
-
-"""
 inoculum
 configuration
-SEIR
 dispersion_kernel_rust
 dispersion_kernel_septo
 growth_pea
+SEIR
+""".split()
+
+"""
+
 .split()
 """
 
@@ -30,6 +31,42 @@ rain = Factory(name='rain',
                  category='Environment',
                  nodemodule='adaptor',
                  nodeclass='rain',
+                 )
+
+inoculum = Factory(name='inoculum',
+                 category='Initialization',
+                 nodemodule='adaptor',
+                 nodeclass='rain',
+                 )
+
+configuration = Factory(name='configuration',
+                 category='Additional function',
+                 nodemodule='adaptor',
+                 nodeclass='configuration',
+                 )
+
+dispersion_kernel_rust = Factory(name='dispersion_kernel_rust',
+                 category='Additional function',
+                 nodemodule='adaptor',
+                 nodeclass='dispersion_kernel_rust',
+                 )
+
+dispersion_kernel_septo = Factory(name='dispersion_kernel_septo',
+                 category='Additional function',
+                 nodemodule='adaptor',
+                 nodeclass='dispersion_kernel_septo',
+                 )
+
+growth_pea = Factory(name='growth_pea',
+                 category='Additional function',
+                 nodemodule='adaptor',
+                 nodeclass='growth_pea',
+                 )
+
+SEIR = Factory(name='SEIR',
+                 category='Main function',
+                 nodemodule='adaptor',
+                 nodeclass='SEIR',
                  )
 """
 order_param = Factory(name='order parameters',
