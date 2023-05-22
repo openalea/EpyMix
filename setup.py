@@ -21,7 +21,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="openalea.epymix",
-    version="1.0",
+    version="1.1.0",
     description="Epidemic dilution and barrier factors in Mixture crops ",
     long_description="A Python Model to study Epidemic dilution and barrier factors in Mixture crops ",
 
