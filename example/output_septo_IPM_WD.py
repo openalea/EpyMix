@@ -73,7 +73,7 @@ time_start = '2019-09-01'
 time_end = '2020-09-01'
 sowing_date = '2019-09-01'
 rainfall_threshold = 3
-rain = rain(site, time_start, time_end, delta_t, sowing_date, rainfall_threshold)
+_rain = rain(site, time_start, time_end, delta_t, sowing_date, rainfall_threshold)
 
 ### INOCULUM PARAMETERS
 # inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs)
@@ -103,7 +103,7 @@ kernel_ure, C_Disp_ure = dispersion_kernel_rust(day_length, alpha_ure, radius_ur
 ### SEIR FUNCTION
 Nsp, Pth, Poi, Sth, Sus, Lat, Ifc, Ifv, Rem, LAI, LAI_wheat, Poo, Eps, AUDPC, Scont = \
     SEIR(t=t , delta_t0=delta_t0, delta_t=delta_t, season=season, delta_companion=delta_companion,
-    disease=disease, rain=rain, arrangement=arrangement, inoc_init=inoc_init, ng_ext0=ng_ext0,
+    disease=disease, rain=_rain, arrangement=arrangement, inoc_init=inoc_init, ng_ext0=ng_ext0,
     mu_wheat=mu_wheat, nu=nu, beta_wheat=beta_wheat, #beta_companion=beta_companion, end_companion=end_companion
     end_wheat=end_wheat, LAI_K=LAI_K, ber_wheat=ber_wheat, ber_companion=ber_companion, Pth_inde=Pth_inde, Poi_inde=Poi_inde,
     h_wheat=h_wheat, h_companion=h_companion,
@@ -136,4 +136,4 @@ plt.plot(T, Sus, color='green')
 plt.plot(T, Poi, color='brown')
 plt.plot(T, Ifv, color='red')
 plt.plot(T, Ifc, color='red',linestyle="--")
-plt.show()
+plt.show()  

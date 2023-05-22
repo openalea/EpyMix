@@ -31,122 +31,71 @@ rain = Factory(name='rain',
                  category='Environment',
                  nodemodule='adaptor',
                  nodeclass='rain',
+                 outputs=[dict(name='precipitation', interface='ISequence')],
                  )
 
 inoculum = Factory(name='inoculum',
                  category='Initialization',
                  nodemodule='adaptor',
-                 nodeclass='rain',
+                 nodeclass='inoculum',
+                 outputs=[dict(name='inoculum', interface='ISequence'),
+                          dict(name='ng_ext', interface='IInt')],
                  )
 
 configuration = Factory(name='configuration',
                  category='Additional function',
                  nodemodule='adaptor',
                  nodeclass='configuration',
+                 outputs=[dict(name='arrangement', interface='ISequence')],
                  )
 
 dispersion_kernel_rust = Factory(name='dispersion_kernel_rust',
                  category='Additional function',
                  nodemodule='adaptor',
                  nodeclass='dispersion_kernel_rust',
+                outputs=[dict(name='kernel_ure', interface='ISequence'),
+                          dict(name='C_Disp_ure', interface='IInt')],
+
                  )
 
 dispersion_kernel_septo = Factory(name='dispersion_kernel_septo',
                  category='Additional function',
                  nodemodule='adaptor',
                  nodeclass='dispersion_kernel_septo',
+                outputs=[dict(name='kernel_asco', interface='ISequence'),
+                          dict(name='C_Disp_asco', interface='IInt'),
+                          dict(name='kernel_pycnid', interface='ISequence'),
+                          dict(name='C_Disp_pycnid', interface='IInt'),
+                          ],
                  )
 
 growth_pea = Factory(name='growth_pea',
                  category='Additional function',
                  nodemodule='adaptor',
                  nodeclass='growth_pea',
+                 outputs=[dict(name='Pth_inde', interface='ISequence'),
+                          dict(name='Pea_inde', interface='ISequence')]
                  )
 
 SEIR = Factory(name='SEIR',
                  category='Main function',
                  nodemodule='adaptor',
                  nodeclass='SEIR',
+                 outputs=[
+                     dict(name='Nsp', interface='ISequence'),
+                     dict(name='Pth', interface='ISequence'),
+                     dict(name='Poi', interface='ISequence'),
+                     dict(name='Sth', interface='ISequence'),
+                     dict(name='Sus', interface='ISequence'),
+                     dict(name='Lat', interface='ISequence'),
+                     dict(name='Ifc', interface='ISequence'),
+                     dict(name='Ifv', interface='ISequence'),
+                     dict(name='Rem', interface='ISequence'),
+                     dict(name='LAI', interface='ISequence'),
+                     dict(name='LAI_wheat', interface='ISequence'),
+                     dict(name='Poo', interface='ISequence'),
+                     dict(name='Eps', interface='ISequence'),
+                     dict(name='AUDPC', interface='ISequence'),
+                     dict(name='Scont', interface='ISequence'),
+                 ]
                  )
-"""
-order_param = Factory(name='order parameters',
-                   description='Set of parameters for each tree order of the weber and Penn model',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='order_parameters',
-                   )
-
-tree_param = Factory(name='tree parameters',
-                   description='Set of parameters of weber and penn model.',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='tree_parameters',
-                   )
-
-quaking_aspen = Factory(name='quaking aspen',
-                   description='Quaking Aspen parameters',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='quaking_aspen',
-                   )
-
-black_tupelo = Factory(name='black tupelo',
-                   description='Black Tupelo parameters',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='black_tupelo',
-                   )
-
-black_oak = Factory(name='black oak',
-                   description='Black Oak parameters',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='black_oak',
-                   )
-
-weeping_willow = Factory(name='weeping willow',
-                   description='Weeping Willow parameters',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='weeping_willow',
-                   )
-
-weber_penn = Factory(name='weber and penn',
-                   description='Tree generation from parameters.',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='weber_penn',
-                   )
-
-weber_penn_markov = Factory(name='weber and penn (markov)',
-                   description='Tree generation from parameters.',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='weber_penn_markov',
-                   )
-
-weber_penn_mtg = Factory(name='weber and penn (mtg)',
-                   description='Geometric solver using Weber and Penn parameters on MTG.',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='weber_penn_mtg',
-                   )
-
-species = Factory(name='species',
-                   description='Tree parameters for the Weber and Penn model.',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='Species',
-                   )
-
-read_arbaro = Factory(name='read arbaro xml',
-                   description='Import weber and penn parameters from Arbaro software.',
-                   category='Simulation',
-                   nodemodule='trunk_parameters',
-                   nodeclass='import_arbaro',
-                   inputs = [dict(name='filename', interface=IFileStr('*.xml')),],
-                   )
-
-
-
-"""
