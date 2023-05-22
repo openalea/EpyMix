@@ -1,7 +1,7 @@
 # EpyMix
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7139051.svg)](https://doi.org/10.5281/zenodo.7139051)
-[![Anaconda-Server Badge](https://anaconda.org/openalea3/openalea.epymix/badges/installer/conda.svg)](https://conda.anaconda.org/openalea3)
+[![Anaconda-Server Badge](https://anaconda.org/openalea3/openalea.epymix/badges/version.svg)](https://anaconda.org/openalea3/openalea.epymix)
 ## Description
 
 This model is based on a SEIR-like model describing canopy growth and epidemic dynamics. 
