@@ -9,7 +9,7 @@ __description__ = 'Intercropping for pest management'
 __url__ = 'https://github.com/openalea-incubator/epymix'
 
 __editable__ = 'True'
-__icon__ = 'icon.png'
+__icon__ = 'icon_epymix.png'
 __alias__ = ["EpyMix"] # Aliases for compatibitity
 
 __all__ = """
