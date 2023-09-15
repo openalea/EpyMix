@@ -41,7 +41,7 @@ def configuration(
         scenario_rot='uniform',
         wheat_fraction=0.5):
     """ Set the spatial configutation/arrangement of th field """
-    return _configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction), 
+    return _configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction),
 
 def dispersion_kernel_rust(
         day_length=4320,
@@ -146,3 +146,120 @@ def SEIR(
         C_Disp_ure=C_Disp_ure, kernel_ure=kernel_ure, C_Disp_asco=C_Disp_asco, kernel_asco=kernel_asco,
         C_Disp_pycnid=C_Disp_pycnid, kernel_pycnid=kernel_pycnid
 )
+
+
+def ipm_SEIR(delta_t=10,
+             rainfall_threshold=3,
+             scenario_ino='initial_inoculum',
+             Lx=1,
+             Ly=1,
+             Lr=1,
+             frac_inf=1,
+             inoc_init_abs=20000000,
+             ng_ext0_abs=20000,
+             scenario_rot='uniform',
+             wheat_fraction=0.5,
+             day_length=4320,
+             alpha_ure=3,
+             radius_ure=5,
+             alpha_asco=3,
+             radius_asco=5,
+             alpha_pycnid=2e-05,
+             radius_pycnid=5,
+             t=250,
+             season=250,
+             mu_companion=0.03,
+             beta_companion=0.09,
+             end_companion=140,
+             LAI_K=6,
+             delta_companion=0,
+             disease="septo",
+             mu_wheat=0.03,
+             nu=0.03,
+             beta_wheat=0.09,
+             end_wheat=140,
+             ber_wheat=1,
+             ber_companion=1,
+             h_wheat=1,
+             h_companion=1,
+             lambd=20,
+             delta_ei=5,
+             s0=0.0001,
+             pi_inf0=0.0002,
+             rho=0.002,
+             psi=0.3,
+             gamma=0,
+             theta=0.15,
+             sigma=45000000,
+             sigma_asco=9000000,
+             inf_begin=0
+             ) :
+
+    ddrain = rain(delta_t=delta_t, rainfall_threshold=rainfall_threshold)[0]
+    inoc_init, ng_ext0 = inoculum(scenario_ino=scenario_ino,
+                                  Lx=Lx,
+                                  Ly=Ly,
+                                  frac_inf=frac_inf,
+                                  inoc_init_abs=inoc_init_abs,
+                                  ng_ext0_abs=ng_ext0_abs)
+    arrangement = configuration(Lr=Lr,
+                                Lx=Lx,
+                                Ly=Ly,
+                                scenario_rot=scenario_rot,
+                                wheat_fraction=wheat_fraction,
+                                )[0]
+    kernel_ure, C_Disp_ure = dispersion_kernel_rust(
+        day_length=day_length,
+        alpha_ure=alpha_ure,
+        radius_ure=radius_ure)
+
+    kernel_asco, C_Disp_asco, kernel_pycnid, C_Disp_pycnid = dispersion_kernel_septo(
+        day_length=day_length,
+        alpha_asco=alpha_asco,
+        radius_asco=radius_asco,
+        alpha_pycnid=alpha_pycnid,
+        radius_pycnid=radius_pycnid)
+
+    Pth_inde, Poi_inde = growth_pea(
+        t=t,
+        season=season,
+        arrangement=arrangement,
+        mu_companion=mu_companion,
+        beta_companion=beta_companion,
+        end_companion=end_companion,
+        LAI_K=LAI_K)
+
+    return SEIR(
+        ddrain, arrangement, inoc_init, ng_ext0, Pth_inde, Poi_inde,
+        kernel_ure=kernel_ure,
+        C_Disp_ure=C_Disp_ure,
+        kernel_asco=kernel_asco,
+        C_Disp_asco=C_Disp_asco,
+        kernel_pycnid=kernel_pycnid,
+        C_Disp_pycnid=C_Disp_pycnid,
+        t=t,
+        delta_t0=delta_t,
+        delta_t=delta_t,
+        season=season,
+        delta_companion=delta_companion,
+        disease=disease,
+        mu_wheat=mu_wheat,
+        nu=nu,
+        beta_wheat=beta_wheat,
+        end_wheat=end_wheat,
+        LAI_K=LAI_K,
+        ber_wheat=ber_wheat,
+        ber_companion=ber_companion,
+        h_wheat=h_wheat,
+        h_companion=h_companion,
+        lambd=lambd,
+        delta_ei=delta_ei,
+        s0=s0,
+        pi_inf0=pi_inf0,
+        rho=rho,
+        psi=psi,
+        gamma=gamma,
+        theta=theta,
+        sigma=sigma,
+        sigma_asco=sigma_asco,
+        inf_begin=inf_begin)

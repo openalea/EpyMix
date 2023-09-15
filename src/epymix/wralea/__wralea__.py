@@ -20,6 +20,7 @@ dispersion_kernel_rust
 dispersion_kernel_septo
 growth_pea
 SEIR
+ipm_SEIR
 """.split()
 
 """
@@ -81,6 +82,29 @@ SEIR = Factory(name='SEIR',
                  category='Main function',
                  nodemodule='adaptor',
                  nodeclass='SEIR',
+                 outputs=[
+                     dict(name='Nsp', interface='ISequence'),
+                     dict(name='Pth', interface='ISequence'),
+                     dict(name='Poi', interface='ISequence'),
+                     dict(name='Sth', interface='ISequence'),
+                     dict(name='Sus', interface='ISequence'),
+                     dict(name='Lat', interface='ISequence'),
+                     dict(name='Ifc', interface='ISequence'),
+                     dict(name='Ifv', interface='ISequence'),
+                     dict(name='Rem', interface='ISequence'),
+                     dict(name='LAI', interface='ISequence'),
+                     dict(name='LAI_wheat', interface='ISequence'),
+                     dict(name='Poo', interface='ISequence'),
+                     dict(name='Eps', interface='ISequence'),
+                     dict(name='AUDPC', interface='ISequence'),
+                     dict(name='Scont', interface='ISequence'),
+                 ]
+                 )
+
+epymix_SEIR = Factory(name='ipm_SEIR',
+                 category='Main function',
+                 nodemodule='adaptor',
+                 nodeclass='ipm_SEIR',
                  outputs=[
                      dict(name='Nsp', interface='ISequence'),
                      dict(name='Pth', interface='ISequence'),
