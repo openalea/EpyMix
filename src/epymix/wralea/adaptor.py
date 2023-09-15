@@ -1,7 +1,7 @@
 import random
 
 from openalea.core import *
-
+import numpy as np
 from epymix.rain_WD import rain as _rain ## f_rain
 from epymix.inoculum import inoculum as _inoculum ## inoculum
 from epymix.configuration import configuration as _configuration
@@ -148,7 +148,10 @@ def SEIR(
 )
 
 
-def ipm_SEIR(delta_t=10,
+
+def ipm_SEIR(air_temperature=[10]*24*60,
+             rainfall=[1]*24*30+[5]*24*30,
+             delta_t=10,
              rainfall_threshold=3,
              scenario_ino='initial_inoculum',
              Lx=1,
@@ -194,8 +197,14 @@ def ipm_SEIR(delta_t=10,
              sigma_asco=9000000,
              inf_begin=0
              ) :
-
-    ddrain = rain(delta_t=delta_t, rainfall_threshold=rainfall_threshold)[0]
+    air_temperature = np.array(air_temperature)
+    rainfall = np.array(rainfall)
+    daily_max = np.max(air_temperature[:(len(air_temperature) // 24) * 24].reshape(-1, 24), axis=1)
+    daily_min = np.min(air_temperature[:(len(air_temperature) // 24) * 24].reshape(-1, 24), axis=1)
+    frain = np.where(rainfall > rainfall_threshold, rainfall, 0)
+    daily_rain = np.sum(frain[:(len(frain) // 24) * 24].reshape(-1, 24), axis=1)
+    dd = np.cumsum((daily_min + daily_max) / 2)
+    ddrain = np.ceil(dd[np.argwhere(daily_rain > 0)] / delta_t)
     inoc_init, ng_ext0 = inoculum(scenario_ino=scenario_ino,
                                   Lx=Lx,
                                   Ly=Ly,
