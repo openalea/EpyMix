@@ -20,7 +20,7 @@ dispersion_kernel_rust
 dispersion_kernel_septo
 growth_pea
 SEIR
-ipm_SEIR
+epymix_SEIR
 """.split()
 
 """
@@ -101,7 +101,7 @@ SEIR = Factory(name='SEIR',
                  ]
                  )
 
-epymix_SEIR = Factory(name='ipm_SEIR',
+epymix_SEIR = Factory(name='epymix_SEIR',
                  category='Main function',
                  nodemodule='adaptor',
                  nodeclass='ipm_SEIR',
