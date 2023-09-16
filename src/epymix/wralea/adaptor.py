@@ -149,8 +149,10 @@ def SEIR(
 
 
 
-def ipm_SEIR(air_temperature=[10]*24*60,
-             rainfall=[1]*24*30+[5]*24*30,
+def ipm_SEIR(sowing_date='2019-09-01',
+             daily_tmin=[10]*60,
+             daily_tmax=[20]*60,
+             daily_rain=[1]*30+[5]*30,
              delta_t=10,
              rainfall_threshold=3,
              scenario_ino='initial_inoculum',
@@ -197,14 +199,12 @@ def ipm_SEIR(air_temperature=[10]*24*60,
              sigma_asco=9000000,
              inf_begin=0
              ) :
-    air_temperature = np.array(air_temperature)
-    rainfall = np.array(rainfall)
-    daily_max = np.max(air_temperature[:(len(air_temperature) // 24) * 24].reshape(-1, 24), axis=1)
-    daily_min = np.min(air_temperature[:(len(air_temperature) // 24) * 24].reshape(-1, 24), axis=1)
-    frain = np.where(rainfall > rainfall_threshold, rainfall, 0)
-    daily_rain = np.sum(frain[:(len(frain) // 24) * 24].reshape(-1, 24), axis=1)
-    dd = np.cumsum((daily_min + daily_max) / 2)
-    ddrain = np.ceil(dd[np.argwhere(daily_rain > 0)] / delta_t)
+    daily_tmax = np.array(daily_tmax)
+    daily_tmin = np.array(daily_tmin)
+    daily_rain = np.array(daily_rain)
+    daily_rain = np.where(daily_rain > rainfall_threshold, daily_rain, 0)
+    dd = np.cumsum((daily_tmin + daily_tmax) / 2)
+    dd_rain_days = np.ceil(dd[np.argwhere(daily_rain > 0)] / delta_t)
     inoc_init, ng_ext0 = inoculum(scenario_ino=scenario_ino,
                                   Lx=Lx,
                                   Ly=Ly,
@@ -239,7 +239,7 @@ def ipm_SEIR(air_temperature=[10]*24*60,
         LAI_K=LAI_K)
 
     return SEIR(
-        ddrain, arrangement, inoc_init, ng_ext0, Pth_inde, Poi_inde,
+        dd_rain_days, arrangement, inoc_init, ng_ext0, Pth_inde, Poi_inde,
         kernel_ure=kernel_ure,
         C_Disp_ure=C_Disp_ure,
         kernel_asco=kernel_asco,
