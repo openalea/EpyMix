@@ -238,7 +238,7 @@ def ipm_SEIR(sowing_date='2019-09-01',
         end_companion=end_companion,
         LAI_K=LAI_K)
 
-    return SEIR(
+    outputs =  SEIR(
         dd_rain_days, arrangement, inoc_init, ng_ext0, Pth_inde, Poi_inde,
         kernel_ure=kernel_ure,
         C_Disp_ure=C_Disp_ure,
@@ -272,3 +272,5 @@ def ipm_SEIR(sowing_date='2019-09-01',
         sigma=sigma,
         sigma_asco=sigma_asco,
         inf_begin=inf_begin)
+
+    return [arr.flatten().tolist() for arr in outputs]
