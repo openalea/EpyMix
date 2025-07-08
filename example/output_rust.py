@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from epymix.rain import rain as _rain ## f_rain
+from epymix.rain import rain as rain ## f_rain
 from epymix.inoculum import inoculum ## inoculum
 from epymix.configuration import configuration
 from epymix.SEIR import SEIR ## SEIR fonction principale

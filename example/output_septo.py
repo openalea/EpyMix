@@ -1,7 +1,10 @@
+import os
 import numpy as np
+import pandas as pd
+import datetime
 import matplotlib.pyplot as plt
 
-from epymix.rain import rain as _rain ## f_rain
+from epymix.rain import rain as rain ## f_rain
 from epymix.inoculum import inoculum ## inoculum
 from epymix.configuration import configuration
 from epymix.SEIR import SEIR ## SEIR fonction principale
@@ -25,7 +28,7 @@ Lx=1 # Lx: number of patch along the x-axis
 Ly=1 # Ly: number of patch along the y-axis
 scenario_rot='uniform' # scenario_rot: rotation scenario (chose: uniform, random, chessboard, alternate, alternate_rank, etc)
 wheat_fraction=0.5 # wheat_fraction: wheat fraction within each patch
-arrangement = f_configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
+arrangement = configuration(Lr, Lx, Ly, scenario_rot, wheat_fraction)
 
 
 ## GROWTH PARAMETERS
@@ -61,9 +64,9 @@ inf_begin = 0*int(delta_t0/delta_t)  #  1000 dd %% date of epidemic start (gener
 
 ### RAIN PARAMETER
 ### _rain, return rain
-annees = np.arange(2000,2000+n_season,1) #1995: défavorable; 1997: moyenne, 2000: très favorable
-annees = annees.tolist()
-rain = _rain(annees, delta_t)
+year=2012
+rain = rain(year, n_season, delta_t)
+
 
 ### INOCULUM PARAMETERS
 # inoculum(scenario_ino, Lx, Ly, frac_inf, inoc_init_abs, ng_ext0_abs)
@@ -126,3 +129,4 @@ plt.plot(T, Sus, color='green')
 plt.plot(T, Poi, color='brown')
 plt.plot(T, Ifv, color='red')
 plt.plot(T, Ifc, color='red',linestyle="--")
+plt.show()
