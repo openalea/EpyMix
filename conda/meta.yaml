@@ -17,6 +17,7 @@ requirements:
   build:
     - python {{PY_VER}}
     - setuptools
+    - openalea.deploy
   run:
     - python >=3.6
     - scipy
@@ -31,8 +32,8 @@ test:
     - test/data/**
   commands:
     - cd test
-    - pytest -v --ignore=test_aml.py  --ignore=test_stat.py
-
+    - pytest -v 
+  
 about:
   home: {{ data.get('url') }}
   license: CeCILL-C
